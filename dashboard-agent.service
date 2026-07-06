@@ -1,0 +1,14 @@
+[Unit]
+Description=Dashboard Server Monitoring Agent
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=/opt/dashboard-agent/config.env
+ExecStart=/opt/dashboard-agent/agent.sh
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
