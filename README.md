@@ -6,7 +6,7 @@ Linux background agent for the Dashboard iOS app. Collects CPU, RAM, disk, and l
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Roman8255/dashboard-server-agent/main/install.sh \
-  | sudo bash -s -- --token=YOUR_AGENT_TOKEN --api=https://romanbednarik.sk
+  | sudo bash -s -- --token=YOUR_AGENT_TOKEN --api=https://romanbednarik.com
 ```
 
 Get `YOUR_AGENT_TOKEN` from the Dashboard app when adding a new server.
