@@ -29,10 +29,16 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 API_BASE="${API_BASE%/}"
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+AGENT_REPO_URL="${DASHBOARD_AGENT_REPO_URL:-https://raw.githubusercontent.com/Roman8255/dashboard-server-agent/main}"
 
 mkdir -p "$INSTALL_DIR"
-cp "$SCRIPT_DIR/agent.sh" "$INSTALL_DIR/agent.sh"
+
+# When piped from curl (curl ... | bash), BASH_SOURCE is unset — download agent.sh instead.
+if [[ -n "${BASH_SOURCE[0]:-}" && -f "$(dirname "${BASH_SOURCE[0]}")/agent.sh" ]]; then
+  cp "$(dirname "${BASH_SOURCE[0]}")/agent.sh" "$INSTALL_DIR/agent.sh"
+else
+  curl -fsSL "${AGENT_REPO_URL}/agent.sh" -o "$INSTALL_DIR/agent.sh"
+fi
 chmod +x "$INSTALL_DIR/agent.sh"
 
 cat > "$INSTALL_DIR/config.env" <<EOF
