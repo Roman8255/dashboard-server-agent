@@ -126,6 +126,7 @@ post_heartbeat() {
 
 while true; do
   if post_metrics; then
+    :
   else
     post_heartbeat || true
     sleep "$INTERVAL"
