@@ -28,6 +28,16 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
+if ! command -v curl >/dev/null 2>&1; then
+  echo "curl is required. On Raspberry Pi OS: sudo apt-get update && sudo apt-get install -y curl"
+  exit 1
+fi
+
+if ! command -v awk >/dev/null 2>&1; then
+  echo "awk is required."
+  exit 1
+fi
+
 API_BASE="${API_BASE%/}"
 AGENT_REPO_URL="${DASHBOARD_AGENT_REPO_URL:-https://raw.githubusercontent.com/Roman8255/dashboard-server-agent/main}"
 
